@@ -1,13 +1,13 @@
 {
-  "name": "setupcap",
+  "name": "captcha",
   "permissions": "NONE",
   "restriction": "1",
   "_id": "WscZE",
   "actions": [
     {
-      "channel": "0",
-      "varName": "",
-      "message": "ok, so what is the captcha in dbm?\nthis captcha will randomly generate numbers and letters and store them\nso if the user correctly input then it's will give him a role!\nexample:\nbot: Zs2XP4\nuser response: Zs2XP4\nbot: *give the user a role*",
+      "channel": "5",
+      "varName": "mem",
+      "message": "so here is a captcha for you ${tempVars(\"mem\")}",
       "storage": "0",
       "varName2": "",
       "iffalse": "0",
@@ -47,33 +47,15 @@
     {
       "storage": "1",
       "varName": "background",
-      "channel": "0",
-      "varName2": "",
+      "channel": "5",
+      "varName2": "${tempVars(\"mem\")}",
       "message": "",
       "name": "Send Image"
     },
     {
-      "member": "1",
-      "varName": "",
-      "info": "1",
-      "storage": "1",
-      "varName2": "id",
-      "name": "Store Member Info"
-    },
-    {
-      "channel": "0",
-      "varName": "",
-      "message": "${tempVars(\"capt\")}",
-      "storage": "0",
-      "varName2": "",
-      "iffalse": "0",
-      "iffalseVal": "",
-      "name": "Send Message"
-    },
-    {
-      "storage": "0",
-      "varName": "",
-      "filter": "content.equals('${tempVars(\"capt\")}') && author.id === '${tempVars(\"id\")}'",
+      "storage": "3",
+      "varName": "mem",
+      "filter": "content.length > 0 && author.id === '${member.id}'",
       "max": "1",
       "time": "60000",
       "iftrue": "0",
@@ -85,14 +67,28 @@
       "name": "Await Response Call Action"
     },
     {
-      "channel": "0",
-      "varName": "",
-      "message": "cool",
-      "storage": "0",
-      "varName2": "",
-      "iffalse": "0",
-      "iffalseVal": "",
-      "name": "Send Message"
+      "member": "2",
+      "varName": "mem",
+      "info": "6",
+      "storage": "1",
+      "varName2": "id",
+      "name": "Store Member Info"
+    },
+    {
+      "info": "0",
+      "find": "${serverVars(\"idofrole\")}",
+      "storage": "1",
+      "varName": "role",
+      "name": "Find Role"
+    },
+    {
+      "member": "2",
+      "varName2": "${tempVars(\"mem\")}",
+      "role": "3",
+      "varName": "role",
+      "name": "Add Member Role"
     }
-  ]
+  ],
+  "event-type": "6",
+  "temp": "mem"
 }
