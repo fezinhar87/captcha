@@ -1,0 +1,136 @@
+{
+  "name": "setupcap",
+  "permissions": "NONE",
+  "restriction": "1",
+  "_id": "WscZE",
+  "actions": [
+    {
+      "channel": "0",
+      "varName": "",
+      "message": "ok, so what is the captcha in dbm?\nthis captcha will randomly generate numbers and letters and store them\nso if the user correctly input then it's will give him a role!\nexample:\nbot: Zs2XP4\nuser response: Zs2XP4\nbot: *give the user a role*",
+      "storage": "0",
+      "varName2": "",
+      "iffalse": "0",
+      "iffalseVal": "",
+      "name": "Send Message"
+    },
+    {
+      "url": "resources/blue.jpg",
+      "storage": "1",
+      "varName": "background",
+      "name": "Create Image"
+    },
+    {
+      "storage": "1",
+      "varName": "ran",
+      "min": "4",
+      "max": "6",
+      "name": "Generate Random Number"
+    },
+    {
+      "input": "aA0",
+      "wordLength": "${tempVars(\"ran\")}",
+      "storage": "1",
+      "varName": "capt",
+      "name": "Randomize Letters"
+    },
+    {
+      "storage": "1",
+      "varName": "background",
+      "x": "129",
+      "y": "48",
+      "font": "fonts/open-sans.fnt",
+      "width": "",
+      "text": "${tempVars(\"capt\")}",
+      "name": "Draw Text on Image"
+    },
+    {
+      "storage": "1",
+      "varName": "background",
+      "channel": "0",
+      "varName2": "",
+      "message": "",
+      "name": "Send Image"
+    },
+    {
+      "channel": "0",
+      "varName": "",
+      "message": "please repeat the letters you see to complete the setup",
+      "storage": "0",
+      "varName2": "",
+      "iffalse": "0",
+      "iffalseVal": "",
+      "name": "Send Message"
+    },
+    {
+      "storage": "0",
+      "varName": "",
+      "filter": "content.length > 0 && author.id === '${member.id}'",
+      "max": "1",
+      "time": "60000",
+      "iftrue": "0",
+      "iftrueVal": "",
+      "iffalse": "1",
+      "iffalseVal": "",
+      "storage2": "0",
+      "varName2": "",
+      "name": "Await Response Call Action"
+    },
+    {
+      "member": "1",
+      "varName": "",
+      "info": "6",
+      "storage": "1",
+      "varName2": "id",
+      "name": "Store Member Info"
+    },
+    {
+      "storage": "1",
+      "varName": "id",
+      "comparison": "1",
+      "value": "tempVars(\"capt\")",
+      "iftrue": "0",
+      "iftrueVal": "",
+      "iffalse": "1",
+      "iffalseVal": "",
+      "name": "Check Variable"
+    },
+    {
+      "channel": "0",
+      "varName": "",
+      "message": "setup done",
+      "storage": "0",
+      "varName2": "",
+      "iffalse": "0",
+      "iffalseVal": "",
+      "name": "Send Message"
+    },
+    {
+      "roleName": "verfited users",
+      "hoist": "true",
+      "mentionable": "false",
+      "color": "GREEN",
+      "position": "",
+      "storage": "1",
+      "varName": "ROLEC",
+      "name": "Create Role"
+    },
+    {
+      "role": "3",
+      "varName": "ROLEC",
+      "info": "1",
+      "storage": "2",
+      "varName2": "idofrole",
+      "name": "Store Role Info"
+    },
+    {
+      "channelName": "GET verfited",
+      "categoryID": "",
+      "topic": "",
+      "position": "",
+      "storage": "2",
+      "varName": "chgetv",
+      "name": "Create Text Channel"
+    }
+  ]
+}
